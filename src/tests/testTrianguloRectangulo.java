@@ -4,43 +4,52 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
 import clases.TrianguloRectangulo;
-
+/**
+ * Clase de pruebas para TrianguloRectangulo.
+ * Se comprueban cálculos de área, perímetro, hipotenusa y validación de entradas.
+ */
 public class testTrianguloRectangulo {
-	TrianguloRectangulo t1 = new TrianguloRectangulo();
-	TrianguloRectangulo t2 = new TrianguloRectangulo(2,4);
+	TrianguloRectangulo t1 = new TrianguloRectangulo(3,4);
+	TrianguloRectangulo tdefecto = new TrianguloRectangulo();
 	
 	@Test
 	public void testCalcularHipotenusat1() {
-		double hip = t1.hipotenusa();
+		assertEquals(5, t1.hipotenusa(), 0.0001);
 	}
+	
 	@Test
-	public void testCalcularHipotenusatt2() {
-		double hip = t2.hipotenusa();
+	public void testCalcularHipotenusatdefecto() {
+
+		assertEquals(Math.sqrt(2), tdefecto.hipotenusa(), 0.0001);
 	}
+	
 	@Test
 	public void testCalcularAreat1() {
-		double area = t1.area();
+		assertEquals(3*4/2, t1.area(), 0.0001);
 	}
+	
 	@Test
-	public void testCalcularAreat2() {
-		double area = t2.area();
+	public void testCalcularAreatdefecto() {
+		assertEquals(0.5, tdefecto.area(), 0.0001);
 	}
+	
 	@Test
 	public void testCalcularPerimetrot1() {
-		double perimetro = t1.perimetro();
+		assertEquals(3+4+5, t1.perimetro(), 0.0001);
 	}
+	
 	@Test
-	public void testCalcularPerimetrot2() {
-		double perimetro = t2.perimetro();
+	public void testCalcularPerimetrotdefecto() {
+		assertEquals(1+1+Math.sqrt(2), tdefecto.perimetro(), 0.0001);
 	}
+	
 	@Test
 	public void testCatetoNegativo() {
 		  Exception ex = assertThrows(IllegalArgumentException.class, () -> {
-			TrianguloRectangulo t3 = new TrianguloRectangulo(-2,4);
+			new TrianguloRectangulo(-2,4);
 		});
-		  assertEquals("Los catetos deben ser mayores que cero.", ex.getMessage());
+		  assertEquals("Los catetos deben ser mayores a 0.", ex.getMessage());
 
 	}
 	
